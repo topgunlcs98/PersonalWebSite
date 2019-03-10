@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import { Button, ButtonGroup } from 'react-bootstrap'
+import { Button } from 'antd'
 import './Header.css'
 
 export default class Headers extends Component {
     render() {
+        const ButtonGroup = Button.Group
         return(
             <div className="headerContainer">
                 <div className="brand">Hello, Welcome to My Blog!</div>
-                <ButtonGroup className="mr-2" aria-label="Second group">
-                    <Button variant="primary" size="lg">主页</Button>
-                    <Button variant="success" size="lg">登陆</Button>
+                <ButtonGroup>
+                    <Button >主页 Menu</Button>
+                    <Button >登录 Login</Button>
                 </ButtonGroup>
             </div>
         )
