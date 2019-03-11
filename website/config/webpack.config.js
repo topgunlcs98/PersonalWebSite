@@ -23,7 +23,6 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
-const autoprefixer = require('autoprefixer')
 
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -337,6 +336,8 @@ module.exports = function(webpackEnv) {
                 ),
                 
                 plugins: [
+                  ['import', { libraryName: 'antd', style: 'css' }],
+                  //ANTD import as css
                   [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
@@ -347,7 +348,6 @@ module.exports = function(webpackEnv) {
                       },
                     },
                   ],
-                  ['import', { libraryName: 'antd', style: 'css' }],
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -404,80 +404,6 @@ module.exports = function(webpackEnv) {
               sideEffects: true,
             },
             // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
-            {
-                test: /\.css$/,
-                exclude: /node_modules|antd\.css/,
-                use: [
-                  require.resolve('style-loader'),
-                  {
-                    loader: require.resolve('css-loader'),
-                    options: {
-                      importLoaders: 1,
-                      // 改动
-                      modules: true,   // 新增对css modules的支持
-                      localIdentName: '[name]__[local]__[hash:base64:5]', //
-                    },
-                  },
-                  {
-                    loader: require.resolve('postcss-loader'),
-                    options: {
-                      // Necessary for external CSS imports to work
-                      // https://github.com/facebookincubator/create-react-app/issues/2677
-                      ident: 'postcss',
-                      plugins: () => [
-                        require('postcss-flexbugs-fixes'),
-                        autoprefixer({
-                          browsers: [
-                            '>1%',
-                            'last 4 versions',
-                            'Firefox ESR',
-                            'not ie < 9', // React doesn't support IE8 anyway
-                          ],
-                          flexbox: 'no-2009',
-                        }),
-                      ],
-                    },
-                  },
-                ],
-              },
-              //
-              {
-                test: /\.css$/,
-                include: /node_modules|antd\.css/,
-                use: [
-                  require.resolve('style-loader'),
-                  {
-                    loader: require.resolve('css-loader'),
-                    options: {
-                      importLoaders: 1,
-                      // 改动
-                      // modules: true,   // 新增对css modules的支持
-                      // localIdentName: '[name]__[local]__[hash:base64:5]', //
-                    },
-                  },
-                  {
-                    loader: require.resolve('postcss-loader'),
-                    options: {
-                      // Necessary for external CSS imports to work
-                      // https://github.com/facebookincubator/create-react-app/issues/2677
-                      ident: 'postcss',
-                      plugins: () => [
-                        require('postcss-flexbugs-fixes'),
-                        autoprefixer({
-                          browsers: [
-                            '>1%',
-                            'last 4 versions',
-                            'Firefox ESR',
-                            'not ie < 9', // React doesn't support IE8 anyway
-                          ],
-                          flexbox: 'no-2009',
-                        }),
-                      ],
-                    },
-                  },
-                ],
-              },
-    
             // using the extension .module.css
             {
               test: cssModuleRegex,
@@ -543,7 +469,6 @@ module.exports = function(webpackEnv) {
         },
       ],
     },
-    
     plugins: [
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(

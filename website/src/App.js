@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-// import { Container, Col, Row } from 'react-bootstrap'
 import { Layout, Row, Col } from 'antd';
 
 import Headers from './views/menu/Headers'

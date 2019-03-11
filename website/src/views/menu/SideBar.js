@@ -3,6 +3,12 @@ import { Card } from 'antd'
 import SidBarPic from './avatar1.jpg'
 export default class SideBar extends Component {
     render() {
+        const description = (
+          <div>
+            <p>student/coder</p>
+            <p>Stay huangry, Stay foolish</p>
+          </div>
+        ) 
         const { Meta } = Card
         return(
             <div style={{margin: '20px' }}>
@@ -12,8 +18,8 @@ export default class SideBar extends Component {
                   cover={<img alt="example" src={SidBarPic} />}
                 >
                   <Meta
-                  title="Europe Street beat"
-                  description="www.instagram.com"
+                  title="Topgun"
+                  description={description}
                   />
                 </Card>
             </div>
