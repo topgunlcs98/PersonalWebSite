@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { Button } from 'antd'
-import './Header.css'
+import styles from './Header.css'
 
 export default class Headers extends Component {
     render() {
         const ButtonGroup = Button.Group
         return(
-            <div className="headerContainer">
-                <div className="brand">Hello, Welcome to My Blog!</div>
+            <div className={styles.container}>
+                <div className={styles.brand}>Hello, Welcome to My Blog!</div>
                 <ButtonGroup>
-                    <Button >主页 Menu</Button>
-                    <Button >登录 Login</Button>
+                    <Button >主页 Home</Button>
+                    <Button >Login 登录</Button>
                 </ButtonGroup>
             </div>
         )

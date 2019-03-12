@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card } from 'antd'
-import SidBarPic from './avatar1.jpg'
+import SidBarPic from 'src/assets/avatar1.jpg'
 export default class SideBar extends Component {
     render() {
         const description = (
@@ -11,10 +11,10 @@ export default class SideBar extends Component {
         ) 
         const { Meta } = Card
         return(
-            <div style={{margin: '20px' }}>
+            <div style={{marginLeft: '20px', marginTop: '20px' }}>
                 <Card
                   hoverable
-                  style={{ width: 240 }}
+                  style={{ width: 250 }}
                   cover={<img alt="example" src={SidBarPic} />}
                 >
                   <Meta
