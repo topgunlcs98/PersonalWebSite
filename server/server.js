@@ -4,28 +4,11 @@ var app = express()
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/website', {useNewUrlParser: true})
 
-var skillSchema = mongoose.Schema({
-    skill: {type: String, required: true}
-}, {collection: 'skill'})
-
-var eduSchema = mongoose.Schema({
-    startTime: String,
-    endTime: String,
-    title: { type: String, required: true },
-    position: { type: String, required: true }
-}, {collection: 'education'})
 
 var userSchema = mongoose.Schema({
     userName: { type: String, required: true },
     passWord: { type: String, required: true }
 }, {collection: 'users'})
-
-var projectSchema = mongoose.Schema({
-    projectName: { type: String, required: true },
-    projectType: String,
-    projectAbstract: { type: String, required: true },
-    projectDetrail: String
-},{ collection: 'project'})
 
 var profileSchema = mongoose.Schema({
     skills: Array,
@@ -34,10 +17,7 @@ var profileSchema = mongoose.Schema({
     project: Array
 },{collection: 'profile'})
 
-var SkillModel = mongoose.model("SkillModel", skillSchema)
-var EduModel = mongoose.model("EduModel", eduSchema)
 var UserModel = mongoose.model("UserModel", userSchema)
-var ProjectModel = mongoose.model("ProjectModel", projectSchema)
 var ProfileModel = mongoose.model("ProfileModel", profileSchema)
 
 app.use(express.static(__dirname + '/public'))
