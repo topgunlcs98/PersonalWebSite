@@ -27,79 +27,40 @@ var projectSchema = mongoose.Schema({
     projectDetrail: String
 },{ collection: 'project'})
 
+var profileSchema = mongoose.Schema({
+    skills: Array,
+    education: Array,
+    work: Array,
+    project: Array
+},{collection: 'profile'})
+
 var SkillModel = mongoose.model("SkillModel", skillSchema)
 var EduModel = mongoose.model("EduModel", eduSchema)
 var UserModel = mongoose.model("UserModel", userSchema)
 var ProjectModel = mongoose.model("ProjectModel", projectSchema)
+var ProfileModel = mongoose.model("ProfileModel", profileSchema)
 
 app.use(express.static(__dirname + '/public'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.post("/api/website/skill",setSkill)
-app.get("/api/website/skill",fetchSkill)
-app.get("/api/website/edu", fetchEdu)
-app.post("/api/website/edu", setEdu)
+
 app.post("/api/website/user", logIn)
-app.post("/api/website/project", setProject)
-app.get("/api/website/project", fetchProject)
+app.get("/api/website/profile", fetchProfile)
 
-//获取 技能
-function setSkill(req,res) {
-    var skill = req.body
-    SkillModel
-        .create(skill)
-        .then(
-            function() {
-                res.json(200)
-            },
-            function() {
-                res.sendStatus(400)
-            }
-        )
-}
-//获取 技能
-function fetchSkill(req,res) {
-    SkillModel
-        .find()
-        .then(
-            function(skills) {
-                res.json(skills)
-            },
-            function() {
-                res.sendStatus(400)
-            }
-        )
+function fetchProfile(req,res) {
+    ProfileModel
+    .find()
+    .then(
+        function(profile){
+            res.json(profile)
+        },
+        function(){
+            res.sendStatus(400)
+        }
+    )
 }
 
-//获取教育经历
-function fetchEdu(req,res) {
-    EduModel
-        .find()
-        .then(
-            function(edu) {
-                res.json(edu)
-            },
-            function() {
-                res.setStatus(400)
-            }
-        )
-}
-
-//设置教育经历 
-function setEdu(req, res) {
-    var edu = req.body
-    EduModel
-        .create(edu)
-        .then(
-            function() {
-                res.json(200)
-            },
-            function() {
-                res.setStatus(400)
-            }
-        )
-}
 
 //登陆
 function logIn(req,res) {
@@ -117,32 +78,4 @@ function logIn(req,res) {
         })
 }
 
-//获取项目经历
-function fetchProject(req, res) {
-    ProjectModel
-        .find()
-        .then(
-            function(project) {
-                res.json(project)
-            },
-            function(res) {
-                res.json(200)
-            }
-        )
-}
-
-//设置项目经历
-function setProject(req, res) {
-    var project = req.body
-    ProjectModel
-        .create(project)
-        .then(
-            function() {
-                res.json(200)
-            },
-            function() {
-                res.json(400)
-            }
-        )
-}
 app.listen(4000)
