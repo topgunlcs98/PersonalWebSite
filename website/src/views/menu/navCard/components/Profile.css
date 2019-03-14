@@ -8,3 +8,16 @@
 .text {
     font-size: 1.3em
 }
+.schoolText{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.firstRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.quickNavs {
+    margin-right: 30px;
+    margin-bottom: 5px;
+}

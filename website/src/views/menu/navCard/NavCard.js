@@ -20,7 +20,7 @@ export default class NavTab extends Component {
     
     render() {
         const labelArticle = (
-            <div><Icon type="highlight" theme="twoTone" />文章article</div>
+            <div><Icon type="highlight" theme="twoTone" />文章Article</div>
         )
         const labelAboutMe = (
             <div> <Icon type="smile" theme="twoTone" twoToneColor="#eb2f96" />我About Me</div>
