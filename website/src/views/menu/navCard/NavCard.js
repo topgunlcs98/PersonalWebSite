@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Icon } from 'antd'
 
 import AboutMe from './components/AboutMe'
+import Profile from './components/Profile'
 
 export default class NavTab extends Component {
     constructor(props) {
@@ -30,7 +31,7 @@ export default class NavTab extends Component {
         const contentListNoTitle = {
             article: <p>article content</p>,
             me: <AboutMe />,
-            resume: <p>project content</p>,
+            resume: <Profile />,
           }
           const tabListNoTitle = [{
             key: 'article',

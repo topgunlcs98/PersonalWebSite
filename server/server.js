@@ -3,7 +3,7 @@ var bodyParser = require('body-parser')
 var app = express()
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/website', {useNewUrlParser: true})
-
+const cors = require('cors');
 
 var userSchema = mongoose.Schema({
     userName: { type: String, required: true },
@@ -24,6 +24,10 @@ app.use(express.static(__dirname + '/public'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+  }));
 
 app.post("/api/website/user", logIn)
 app.get("/api/website/profile", fetchProfile)

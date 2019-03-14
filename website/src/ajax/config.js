@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Create an instance using the config defaults provided by the library
 const instance = axios.create({
-  baseURL: 'http://localhost:4000/api',
+  baseURL: 'http://localhost:4000',
   // timeout: 1000 * 8,
   validateStatus(status) {
     return status < 300 || status === 304
