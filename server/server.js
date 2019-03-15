@@ -17,8 +17,16 @@ var profileSchema = mongoose.Schema({
     project: Array
 },{collection: 'profile'})
 
+var PostSchema = mongoose.Schema({
+    title: {type:String, required: true},
+    body: String,
+    tag: {type: String, enum: ['POLITICS','ECONOMY', 'EDUCATION','IT', 'HISTORY']},
+    date: { type: Date, default: Date.now }
+}, {collection: 'post'})
+
 var UserModel = mongoose.model("UserModel", userSchema)
 var ProfileModel = mongoose.model("ProfileModel", profileSchema)
+var PostModel = mongoose.model('PostModel', PostSchema)
 
 app.use(express.static(__dirname + '/public'))
 app.use(bodyParser.json())
@@ -29,9 +37,12 @@ app.use(cors({
     credentials: true
   }));
 
-app.post("/api/website/user", logIn)
-app.get("/api/website/profile", fetchProfile)
+app.post("/api/website/user", logIn) //登录
+app.get("/api/website/profile", fetchProfile) //获取简历
+app.get("/api/website/post",fetchPost) //获取博文
+app.post("/api/website/post", createPost)//发博文
 
+//获取简历
 function fetchProfile(req,res) {
     ProfileModel
     .find()
@@ -45,6 +56,34 @@ function fetchProfile(req,res) {
     )
 }
 
+//获取博文
+function fetchPost(req,res) {
+    PostModel
+        .find()
+        .then(
+            function(post) {
+                res.json(post)
+            },
+            function(res) {
+                res.sendStatus(400)
+            }
+        )
+}
+
+//发博文
+function createPost(req,res) {
+    var post = req.body
+    PostModel
+        .create(post)
+        .then(
+            function() {
+                res.json(200)
+            },
+            function() {
+                res.sendStatus(400)
+            }
+        )
+}
 
 //登陆
 function logIn(req,res) {
