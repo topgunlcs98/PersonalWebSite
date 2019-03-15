@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: '100%';
+    padding: 15px;
+    margin-bottom: 40px;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.postWrapper{
+    width: '100%';
+    word-break: break-all;
+    border-bottom: 1px dotted #2db7f5;
+}
+.leftSide {
+    display: flex;
+    flex-direction: row;
+    align-items: center
+}
+
+.titleText {
+    font-size: 2em;
+    font-weight: bolder;
+    margin-right: 10px;
+}

@@ -3,6 +3,7 @@ import { Card, Icon } from 'antd'
 
 import AboutMe from './components/AboutMe'
 import Profile from './components/Profile'
+import Posts from './components/Posts'
 
 export default class NavTab extends Component {
     constructor(props) {
@@ -29,7 +30,7 @@ export default class NavTab extends Component {
             <div> <Icon type="file-pdf" theme="twoTone" twoToneColor="#52c41a" />在线简历Resume</div>
         )
         const contentListNoTitle = {
-            article: <p>article content</p>,
+            article: <Posts />,
             me: <AboutMe />,
             resume: <Profile />,
           }
