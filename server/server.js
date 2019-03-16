@@ -26,7 +26,7 @@ var PostSchema = mongoose.Schema({
 }, {collection: 'post'})
 
 var CommentSchema = mongoose.Schema({
-    name: {type: String, required:true},
+    name: String,
     body: {type: String, required:true},
     date: {type: Date, default: moment().add(8,'hour').toDate()}
 },{collection: 'comment'})

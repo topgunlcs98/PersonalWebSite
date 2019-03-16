@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { Layout, Row, Col } from 'antd';
+import { Layout, Row, Col, Anchor } from 'antd';
 
 import Headers from './views/menu/Headers'
 import SideBar from './views/menu/SideBar'
 import NavCard from './views/menu/navCard/NavCard'
 import CalendarCard from './views/menu/CalendarCard'
+import CommentBar from './views/menu/commentBar/CommentBar'
 
 class App extends Component {
   render() {
     const {Header, Footer, Content} = Layout
+    const { Link } = Anchor
     return (
       <div>
         <Layout>
@@ -20,11 +22,25 @@ class App extends Component {
           <Content>
             <Row>
               <Col span={6}><SideBar /></Col>
-              <Col span={12}><NavCard /></Col>
-              <Col span={6}><CalendarCard /></Col>
+              <Col span={12} id="menu-page"><NavCard /></Col>
+              <Col span={6}>
+                <Col><CalendarCard /></Col>
+                <Col span={18} offset={2}>
+                  <Anchor>
+                    <Link title="Quick Link">
+                      <Link href="#menu-page" title="文章-关于我-简历" />
+                      <Link href="#message-board" title="留言板" />
+                    </Link>
+                  </Anchor>
+                </Col>
+              </Col>
             </Row>
           </Content>
-          <Footer></Footer>
+          <Footer>
+            <Row>
+              <Col span={12} offset={6} id="message-board"><CommentBar /></Col>
+            </Row>
+          </Footer>
         </Layout>
       </div>
     );

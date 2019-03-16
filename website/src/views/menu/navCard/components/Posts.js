@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {PostApi} from 'src/ajax'
 import {Typography, Tag} from 'antd'
+import moment from 'moment'
+
 import styles from './Posts.css'
 
 const {  Paragraph } = Typography
@@ -37,7 +39,7 @@ export default class Posts extends Component {
                     <div className={styles.titleText}>{value.title}</div>
                     <div><Tag>{value.tag}</Tag></div>
                 </div>
-                <div>{value.date}</div>
+                <div>{moment(value.date).format('YYYY-MM-DD HH:mm:ss')}</div>
             </div>
             <div className={styles.postWrapper}>
             <Paragraph ellipsis={{ rows: 3, expandable: true }}>
