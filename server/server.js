@@ -2,6 +2,7 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var app = express()
 var mongoose = require('mongoose')
+var moment = require('moment')
 mongoose.connect('mongodb://localhost:27017/website', {useNewUrlParser: true})
 const cors = require('cors');
 
@@ -21,12 +22,19 @@ var PostSchema = mongoose.Schema({
     title: {type:String, required: true},
     body: String,
     tag: {type: String, enum: ['POLITICS','ECONOMY', 'EDUCATION','IT', 'HISTORY']},
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: moment().add(8,'hour').toDate() }
 }, {collection: 'post'})
+
+var CommentSchema = mongoose.Schema({
+    name: {type: String, required:true},
+    body: {type: String, required:true},
+    date: {type: Date, default: moment().add(8,'hour').toDate()}
+},{collection: 'comment'})
 
 var UserModel = mongoose.model("UserModel", userSchema)
 var ProfileModel = mongoose.model("ProfileModel", profileSchema)
 var PostModel = mongoose.model('PostModel', PostSchema)
+var CommentModel = mongoose.model('CommentModel', CommentSchema)
 
 app.use(express.static(__dirname + '/public'))
 app.use(bodyParser.json())
@@ -41,6 +49,8 @@ app.post("/api/website/user", logIn) //登录
 app.get("/api/website/profile", fetchProfile) //获取简历
 app.get("/api/website/post",fetchPost) //获取博文
 app.post("/api/website/post", createPost)//发博文
+app.get("/api/website/comment", fetchComment) //获取评论
+app.post("/api/website/comment", sendComment) //发表评论
 
 //获取简历
 function fetchProfile(req,res) {
@@ -75,6 +85,35 @@ function createPost(req,res) {
     var post = req.body
     PostModel
         .create(post)
+        .then(
+            function() {
+                res.json(200)
+            },
+            function() {
+                res.sendStatus(400)
+            }
+        )
+}
+
+//获取评论
+function fetchComment(req,res){
+    CommentModel
+        .find()
+        .then(
+            function(comment) {
+                res.json(comment)
+            },
+            function(res) {
+                res.sendStatus(400)
+            }
+        )
+}
+
+//发表评论
+function sendComment(req,res) {
+    var comment = req.body
+    CommentModel
+        .create(comment)
         .then(
             function() {
                 res.json(200)
