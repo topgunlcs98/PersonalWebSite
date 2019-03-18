@@ -22,7 +22,6 @@ export default class Posts extends Component {
     async fetchPost () {
        try{
         const {data} = await PostApi.fetchPost()
-        console.log(data)
         this.setState({
             posts: data
         })

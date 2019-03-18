@@ -17,7 +17,7 @@ export default class SideBar extends Component {
                   style={{ width: 250 }}
                   cover={<img alt="example" src={SidBarPic} />}
                   actions={[<a href="mailto:ericliu9866@gmail.com"><Icon type="mail" /></a>, 
-                            <a href="https://github.com/topgunlcs98"><Icon type="github" theme="filled" />topgunlcs98</a>]}
+                            <a target="_blank" rel="noopener noreferrer" href="https://github.com/topgunlcs98"><Icon type="github" theme="filled" />topgunlcs98</a>]}
                 >
                   <Meta
                   title="Topgun"

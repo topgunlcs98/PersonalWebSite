@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Layout, Row, Col, Anchor } from 'antd';
-
+import {Provider} from 'react-redux'
+import Store from 'src/redux/Store'
 import Headers from './views/menu/Headers'
 import SideBar from './views/menu/SideBar'
 import NavCard from './views/menu/navCard/NavCard'
@@ -47,4 +48,8 @@ class App extends Component {
   }
 }
 
-export default App;
+export default ()=> (
+  <Provider store={Store}>
+    <App />
+  </Provider>
+);

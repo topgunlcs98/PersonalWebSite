@@ -26,12 +26,10 @@ export default class CommentBar extends Component {
     async fetchComments() {
         try{
             const {data} = await CommentApi.fetchComments()
-            console.log(data)
             this.setState({
                 replies: data,
                 num: data.length
             })
-            console.log(this.state.replies)
         }catch(err){
             console.log(err)
         }
