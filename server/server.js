@@ -135,7 +135,7 @@ function logIn(req,res) {
             } else if (users[0].passWord === password) {
                 res.json({isSuccess: true, message: '登录成功'})
             } else if (users[0].passWord !== password) {
-                res.json({isSuccess: true, message: '密码错误'})
+                res.json({isSuccess: false, message: '密码错误'})
             }
         })
 }
