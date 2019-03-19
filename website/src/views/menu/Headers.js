@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
-import { Button,  Modal, Input } from 'antd'
+import { Button,  Modal, Input, message } from 'antd'
 import styles from './Header.css'
 
 import {userLogin} from 'src/redux/action'
 import {connect} from 'react-redux'
+import {withRouter} from "react-router-dom"
 
-@connect()
+const Message = message
+const mapStateToProps = (state) => {
+    return{
+        loginState: state.LogInReducer
+    }
+}
+@connect(mapStateToProps)
 class Headers extends Component {
     state = {
         visible: false, //浮层可视状态
@@ -13,7 +20,15 @@ class Headers extends Component {
         passWord: ''
     }
 
+    toMenu = () => {
+        this.props.history.push('/')
+    }
+
     showModal = () => {
+        if(this.props.loginState.isSuccess) {
+            this.props.history.push('/manage')
+            return
+        }
         this.setState({
           visible: true,
         });
@@ -25,8 +40,13 @@ class Headers extends Component {
             passWord: this.state.passWord
         }
         try{
-            const {message, isSuccess}= await this.props.dispatch(userLogin(body))
-            console.log(message)
+            const { isSuccess, message }= await this.props.dispatch(userLogin(body))
+            if(isSuccess) {
+                Message.success(message)
+                this.props.history.push('/manage')
+            } else {
+                Message.error(message)
+            }
         }catch(err) {
             console.log(err)
         }
@@ -56,12 +76,13 @@ class Headers extends Component {
 
     render() {
         const ButtonGroup = Button.Group
+        const secLabel= this.props.loginState.isSuccess? 'Admin 管理': 'Login 登录'
         return(
             <div className={styles.container}>
                 <div className={styles.brand}>Hello, Welcome to My Blog!</div>
                 <ButtonGroup>
-                    <Button >主页 Home</Button>
-                    <Button onClick={this.showModal}>Login 登录</Button>
+                    <Button onClick={this.toMenu}>主页 Home</Button>
+                    <Button onClick={this.showModal}>{secLabel}</Button>
                     <Modal
                         title="登录---管理我的简历和文章"
                         visible={this.state.visible}
@@ -82,4 +103,4 @@ class Headers extends Component {
         )
     }
 }
-export default Headers
+export default withRouter(Headers)

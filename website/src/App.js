@@ -7,6 +7,8 @@ import SideBar from './views/menu/SideBar'
 import NavCard from './views/menu/navCard/NavCard'
 import CalendarCard from './views/menu/CalendarCard'
 import CommentBar from './views/menu/commentBar/CommentBar'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Manage from 'src/views/Manage'
 
 class App extends Component {
   render() {
@@ -50,6 +52,9 @@ class App extends Component {
 
 export default ()=> (
   <Provider store={Store}>
-    <App />
+    <Router>
+      <Route exact path="/" component={App} />
+      <Route path="/manage" component={Manage} />
+    </Router>
   </Provider>
 );
