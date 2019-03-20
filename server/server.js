@@ -21,7 +21,7 @@ var profileSchema = mongoose.Schema({
 var PostSchema = mongoose.Schema({
     title: {type:String, required: true},
     body: String,
-    tag: {type: String, enum: ['POLITICS','ECONOMY', 'EDUCATION','IT', 'HISTORY']},
+    tag: {type: String, enum: ['POLITICS','ECONOMY', 'EDUCATION','IT', 'HISTORY','MILITARY','OTHER']},
     date: { type: Date, default: moment().add(8,'hour').toDate() }
 }, {collection: 'post'})
 
