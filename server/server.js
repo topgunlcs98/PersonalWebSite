@@ -51,6 +51,7 @@ app.get("/api/website/post",fetchPost) //获取博文
 app.post("/api/website/post", createPost)//发博文
 app.get("/api/website/comment", fetchComment) //获取评论
 app.post("/api/website/comment", sendComment) //发表评论
+app.post("/api/website/changeBlog", modifyBlog) //修改博客
 
 //获取简历
 function fetchProfile(req,res) {
@@ -95,6 +96,27 @@ function createPost(req,res) {
         )
 }
 
+//修改博客
+function modifyBlog(req,res) {
+    const { index, content, title } = req.body
+    PostModel
+        .updateOne({_id: index},{
+            title: title,
+            body: content
+        },function(err){
+            if(err){
+                concole.log(err)
+            }
+        })
+        .then(
+            function(){
+                res.json(200)
+            },
+            function(){
+                res.sendStatus(400)
+            }
+        )
+}
 //获取评论
 function fetchComment(req,res){
     CommentModel

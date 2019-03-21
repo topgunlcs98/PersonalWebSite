@@ -6,6 +6,7 @@ import {withRouter} from "react-router-dom"
 import Headers from 'src/views/menu/Headers'
 import BlogCard from 'src/views/settings/BlogCard'
 import ResumeCard from 'src/views/settings/ResumeCard'
+import MyBlog from 'src/views/settings/MyBlog'
 
 const mapStateToProps = (state) => {
     return{
@@ -40,6 +41,8 @@ class Manage extends Component {
             card = <BlogCard />
         } else if(value === 1) {
             card = <ResumeCard />
+        } else if(value === 2) {
+            card = <MyBlog />
         }
         return card
     }
@@ -66,6 +69,7 @@ class Manage extends Component {
                  
                             <Menu.Item key="1" onClick={()=>this.changeCard(0)}>发博客</Menu.Item>
                             <Menu.Item key="2" onClick={()=>this.changeCard(1)}>设置简历</Menu.Item>
+                            <Menu.Item key="3" onClick={()=>this.changeCard(2)}>我的文章</Menu.Item>
                         </Menu>
                     </Sider>
                     <Layout style={{ padding: '0 24px 24px' }}>
