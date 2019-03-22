@@ -1,0 +1,8 @@
+.container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.itemContainer {
+    border-bottom: 0.5px solid gray
+}

@@ -6,5 +6,8 @@ export default {
     },
     createPost(body) {
         return ajax.post('/api/website/post',body)
+    },
+    modifyPost(body) {
+        return ajax.post('/api/website/changeBlog', body)
     }
 }
