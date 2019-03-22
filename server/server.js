@@ -52,6 +52,7 @@ app.post("/api/website/post", createPost)//发博文
 app.get("/api/website/comment", fetchComment) //获取评论
 app.post("/api/website/comment", sendComment) //发表评论
 app.post("/api/website/changeBlog", modifyBlog) //修改博客
+app.post("/api/website/removeBlog",deletePost) //删除博客
 
 //获取简历
 function fetchProfile(req,res) {
@@ -117,6 +118,25 @@ function modifyBlog(req,res) {
             }
         )
 }
+
+//删除博客
+function deletePost(req,res) {
+    const {index} = req.body
+    PostModel
+        .remove({_id: index},function(err){
+            if(err){
+                console.log(err)
+            }
+        })
+        .then(
+            function() {
+                res.json(200)
+            }, function() {
+                res.sendStatus(400)
+            }
+        )
+}
+
 //获取评论
 function fetchComment(req,res){
     CommentModel
