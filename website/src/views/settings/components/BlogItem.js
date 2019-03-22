@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {List, Button, Modal, Input} from 'antd'
+import { List, Button, Modal, Input, message } from 'antd'
 
 import { PostApi } from 'src/ajax'
 
@@ -30,6 +30,7 @@ export default class BlogItem extends Component {
         } catch(err) {
           console.log(err)
         }
+        message.success("修改成功")
         this.setState({
           visible: false,
         });
@@ -47,17 +48,30 @@ export default class BlogItem extends Component {
         })
     }
     
-      handleCancel = (e) => {
+      handleCancel = async() => {
         this.setState({
           visible: false,
         })
+      }
+
+      deleteArtical = async() => {
+        const body = {
+          index: this.props.id
+        }
+        try{
+          await PostApi.deletePost(body)
+        }catch(err){
+          console.log(err)
+        }
+        message.success("删除成功")
+        this.props.updateInfo()
       }
 
     render() {
         const { TextArea } = Input
         return(
            <div>
-               <List.Item actions={[<Button type="primary" size="small" onClick={this.showModal}>edit</Button>, <Button type="danger" size="small">delete</Button>]}>
+               <List.Item actions={[<Button type="primary" size="small" onClick={this.showModal}>edit</Button>, <Button type="danger" size="small" onClick={this.deleteArtical}>delete</Button>]}>
                     <List.Item.Meta
                         title={this.props.title}
                         description={this.props.tag}

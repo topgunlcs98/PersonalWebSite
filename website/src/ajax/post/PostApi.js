@@ -9,5 +9,8 @@ export default {
     },
     modifyPost(body) {
         return ajax.post('/api/website/changeBlog', body)
+    },
+    deletePost(body) {
+        return ajax.post('/api/website/removeBlog',body)
     }
 }

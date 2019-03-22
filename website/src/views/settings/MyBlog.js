@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {List} from 'antd'
+import { List } from 'antd'
 import { PostApi } from 'src/ajax'
 
 import BlogItem from './components/BlogItem'
@@ -39,7 +39,8 @@ export default class MyClass extends Component {
                 >
                     {this.state.blogs.map((value,key) =>
                         <div key={key} className={styles.itemContainer}> 
-                            <BlogItem key={key} title={value.title} id={value._id} tag={value.tag} body={value.body} />
+                            <BlogItem key={key} title={value.title} id={value._id} 
+                                tag={value.tag} body={value.body} updateInfo={this.fetchInfos}/>
                         </div>
                         )}
                 </List>
