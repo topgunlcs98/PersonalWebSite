@@ -53,6 +53,7 @@ app.get("/api/website/comment", fetchComment) //获取评论
 app.post("/api/website/comment", sendComment) //发表评论
 app.post("/api/website/changeBlog", modifyBlog) //修改博客
 app.post("/api/website/removeBlog",deletePost) //删除博客
+app.post("/api/website/profileSettings/setSkill", changeSkill) //改技能
 
 //获取简历
 function fetchProfile(req,res) {
@@ -182,4 +183,26 @@ function logIn(req,res) {
         })
 }
 
+//改技能
+function changeSkill(req, res) {
+    const {skill,index} = req.body
+    console.log(req.body)
+    ProfileModel
+        .updateOne({_id: index},
+            {skills: skill},
+            function(err) {
+                if(err) {
+                    console.log(err)
+                }
+            }
+            )
+        .then(
+            function(){
+                res.json(200)
+            },
+            function(){
+                res.sendStatus(400)
+            }
+        )
+}
 app.listen(4000)
