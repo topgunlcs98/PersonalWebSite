@@ -5,5 +5,8 @@ export default {
     },
     changeSkills(body) {
         return ajax.post('/api/website/profileSettings/setSkill',body)
+    },
+    changeInterest(body) {
+        return ajax.post('/api/website/profileSettings/setInterest',body)
     }
 }

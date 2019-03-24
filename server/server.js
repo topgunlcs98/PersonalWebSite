@@ -15,7 +15,8 @@ var profileSchema = mongoose.Schema({
     skills: Array,
     education: Array,
     work: Array,
-    project: Array
+    project: Array,
+    interest: Array
 },{collection: 'profile'})
 
 var PostSchema = mongoose.Schema({
@@ -54,6 +55,7 @@ app.post("/api/website/comment", sendComment) //发表评论
 app.post("/api/website/changeBlog", modifyBlog) //修改博客
 app.post("/api/website/removeBlog",deletePost) //删除博客
 app.post("/api/website/profileSettings/setSkill", changeSkill) //改技能
+app.post("/api/website/profileSettings/setInterest", changeInterest) //改技能
 
 //获取简历
 function fetchProfile(req,res) {
@@ -186,10 +188,30 @@ function logIn(req,res) {
 //改技能
 function changeSkill(req, res) {
     const {skill,index} = req.body
-    console.log(req.body)
     ProfileModel
         .updateOne({_id: index},
             {skills: skill},
+            function(err) {
+                if(err) {
+                    console.log(err)
+                }
+            }
+            )
+        .then(
+            function(){
+                res.json(200)
+            },
+            function(){
+                res.sendStatus(400)
+            }
+        )
+}
+
+function changeInterest(req, res) {
+    const {interests,index} = req.body
+    ProfileModel
+        .updateOne({_id: index},
+            {interest: interests},
             function(err) {
                 if(err) {
                     console.log(err)

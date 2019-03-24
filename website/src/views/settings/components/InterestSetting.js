@@ -16,10 +16,10 @@ export default class InterestSetting extends Component {
     submitChange = async() => {
         const body={
             index: this.props.id,
-            skill: this.state.tags
+            interests: this.state.tags
         }
         try {
-            await ProfileApi.changeSkills(body)
+            await ProfileApi.changeInterest(body)
         } catch(err) {
             console.log(err)
         }
@@ -28,7 +28,7 @@ export default class InterestSetting extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            tags: nextProps.skills
+            tags: nextProps.interests
         })
     }
     
@@ -68,7 +68,7 @@ export default class InterestSetting extends Component {
         return(
             <div>
                 <h3>修改兴趣</h3>
-                <Tag closable={false} color="#f50">我的兴趣</Tag>
+                <Tag closable={false} color="#2db7f5">我的兴趣</Tag>
             {tags.map((tag, index) => {
               const isLongTag = tag.length > 20;
               const tagElem = (
