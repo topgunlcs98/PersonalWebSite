@@ -41,8 +41,8 @@ export default class Posts extends Component {
                 <div>{moment(value.date).format('YYYY-MM-DD HH:mm:ss')}</div>
             </div>
             <div className={styles.postWrapper}>
-            <Paragraph ellipsis={{ rows: 3, expandable: true }}>
-                {value.body}
+            <Paragraph ellipsis={{ rows: 3, expandable: true }} style={{whiteSpace: "pre-wrap"}}>
+             {value.body}
             </Paragraph>
             </div>
         </div>
