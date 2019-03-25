@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding-top: 20px;
+    margin: 15px
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+.inputSmall {
+    width: 50%;
+}
+
+.inputLarge {
+    width: 80%
+}

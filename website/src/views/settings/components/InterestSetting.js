@@ -66,7 +66,7 @@ export default class InterestSetting extends Component {
     render(){
         const { tags, inputVisible, inputValue } = this.state
         return(
-            <div>
+            <div style={{margin:'15px'}}>
                 <h3>修改兴趣</h3>
                 <Tag closable={false} color="#2db7f5">我的兴趣</Tag>
             {tags.map((tag, index) => {

@@ -66,7 +66,7 @@ export default class SkillSetting extends Component {
     render(){
         const { tags, inputVisible, inputValue } = this.state
         return(
-            <div>
+            <div style={{margin:'15px'}}>
                 <h3>修改技能</h3>
                 <Tag closable={false} color="#f50">我的技能</Tag>
             {tags.map((tag, index) => {

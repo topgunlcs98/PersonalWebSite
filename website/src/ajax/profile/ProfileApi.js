@@ -8,5 +8,8 @@ export default {
     },
     changeInterest(body) {
         return ajax.post('/api/website/profileSettings/setInterest',body)
+    },
+    changeEdu(body) {
+        return ajax.post('/api/website/profileSettings/setEdu', body)
     }
 }
