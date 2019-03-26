@@ -11,5 +11,8 @@ export default {
     },
     changeEdu(body) {
         return ajax.post('/api/website/profileSettings/setEdu', body)
+    },
+    changeWork(body) {
+        return ajax.post('/api/website/profileSettings/setWork', body)
     }
 }

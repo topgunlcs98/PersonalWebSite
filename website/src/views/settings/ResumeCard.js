@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import SkillSetting from './components/SkillSetting'
 import InterestSetting from './components/InterestSetting'
 import EducationSetting from './components/EducationSetting'
+import WorkSetting from './components/WorkSetting'
 import { ProfileApi } from 'src/ajax'
 
 export default class ResumeCard extends Component {
@@ -49,6 +50,7 @@ export default class ResumeCard extends Component {
             <SkillSetting id={this.state.id} skills={this.state.skills} />
             <InterestSetting id={this.state.id} interests={this.state.interest} />
             <EducationSetting id={this.state.id} educations={this.state.education} />
+            <WorkSetting id={this.state.id} works={this.state.work} />
             </div>
         )
     }

@@ -1,46 +1,25 @@
 import React, {Component} from 'react'
-import { Button, List, Form, Col, Row, Input, Radio, message } from 'antd'
-
+import { Button, List, Form, Col, Row, Input, message } from 'antd'
 import styles from './Edu.css'
+
 import {ProfileApi} from 'src/ajax'
 
-export default class EducationSetting extends Component {
+export default class WorkSetting extends Component {
     constructor(props){
         super(props)
         this.state={
-            edus: [],
+            works: [],
             index: '',
             startTime: '',
             endTime: '',
-            phase: '',
-            title: 0,
+            place: '',
+            title: '',
             isShow: false
         }
     }
 
     componentWillReceiveProps(nextProp){
-        this.setState({edus: nextProp.educations, index: nextProp.id})
-    }
-
-    getTitle = (num) => {
-        let title = ''
-        switch(num) {
-            case 0:
-                title = '中学/MiddleSchool'
-                break
-            case 1:
-                title = '本科/Bachelor'
-                break
-            case 2:
-                title = '硕士/Master'
-                break
-            case 3:
-                title = '博士/Phd'
-                break
-            default:
-                break
-        }
-        return title
+        this.setState({works: nextProp.works, index: nextProp.id})
     }
 
     openForm = () => {
@@ -48,8 +27,8 @@ export default class EducationSetting extends Component {
             isShow: !prevState.isShow
         }))
     }
-    
-    onRadioChange = (e) => {
+
+    onTitleChange = (e) => {
         this.setState({
             title: e.target.value
         })
@@ -61,6 +40,25 @@ export default class EducationSetting extends Component {
         })
     }
 
+    handleSave = () => {
+        const newWork = {
+            place: this.state.place,
+            starttime: this.state.startTime,
+            endtime: this.state.endTime,
+            title: this.state.title
+        }
+        var oldState = this.state.works.slice()
+        oldState.push(newWork)
+        this.setState({
+            works: oldState,
+            startTime: '',
+            endTime: '',
+            place: '1111',
+            title: '',
+            isShow: false
+        })
+    }
+
     onEndTimeChange = (e) => {
         this.setState({
             endTime: e.target.value
@@ -68,27 +66,9 @@ export default class EducationSetting extends Component {
     }
 
     onPhaseChange = (e) => {
+        console.log(e.target.value)
         this.setState({
-            phase: e.target.value
-        })
-    }
-
-    handleSave = () => {
-        const newEdu = {
-            phase: this.state.phase,
-            starttime: this.state.startTime,
-            endtime: this.state.endTime,
-            title: this.state.title
-        }
-        var oldState = this.state.edus.slice()
-        oldState.push(newEdu)
-        this.setState({
-            edus: oldState,
-            startTime: '',
-            endTime: '',
-            phase: '',
-            title: 0,
-            isShow: false
+            place: e.target.value
         })
     }
 
@@ -96,9 +76,9 @@ export default class EducationSetting extends Component {
         try{
             const body = {
                 index: this.state.index,
-                edu: this.state.edus
+                work: this.state.works
             }
-            await ProfileApi.changeEdu(body)
+            await ProfileApi.changeWork(body)
         } catch(err){
             console.log(err)
         }
@@ -106,30 +86,24 @@ export default class EducationSetting extends Component {
     }
 
     handleDelete = (index) => {
-        const state = this.state.edus.slice()
+        const state = this.state.works.slice()
         state.splice(index,1)
         this.setState({
-            edus: state
+            works: state
         })
     }
 
     render(){
-        const exps = (this.state.edus || []).map((value,key) => 
+        const exps = (this.state.works || []).map((value,key) => 
             <List.Item key={key} actions={[<Button type="danger" size="small" shape="circle" icon="close"
                 onClick={()=>this.handleDelete(key)} />]}>
                 <List.Item.Meta
                     title={<span>{value.starttime} --- {value.endtime}</span>}
-                    description={value.phase}
+                    description={value.place}
                 />
-                <div>{this.getTitle(value.title)}</div>
+                <div>{value.title}</div>
             </List.Item>
         )
-
-        const radioStyle = {
-            display: 'block',
-            height: '30px',
-            lineHeight: '30px',
-          }
 
         const forms = <div>
             <Form>
@@ -145,17 +119,12 @@ export default class EducationSetting extends Component {
                 </Row>
                 <Row style={{margin: '10px'}}>
                     <Col span={12}>
-                        <Input size="small" className={styles.inputLarge} placeholder={"学校名称"} 
-                            onChange={this.onPhaseChange} value={this.state.phase} />
+                        <Input size="small" className={styles.inputLarge} placeholder={"单位名称"} 
+                            onChange={this.onPhaseChange} value={this.state.place} />
                     </Col>
                     <Col span={12}>
-                        <div>选择获得学位</div>
-                        <Radio.Group value={this.state.title} onChange={this.onRadioChange}>
-                            <Radio style={radioStyle} value={0}>高中</Radio>
-                            <Radio style={radioStyle} value={1}>本科</Radio>
-                            <Radio style={radioStyle} value={2}>硕士</Radio>
-                            <Radio style={radioStyle} value={3}>博士</Radio>
-                        </Radio.Group>
+                         <Input size="small" className={styles.inputLarge} placeholder={"职务名称"} 
+                            onChange={this.onTitleChange} value={this.state.title} />
                     </Col>
                 </Row>
                 <Row>
@@ -169,7 +138,7 @@ export default class EducationSetting extends Component {
         return(
             <div className={styles.container} >
                 <div className={styles.titleContainer}>
-                    <div><h3>修改教育经历</h3></div>
+                    <div><h3>修改工作经历</h3></div>
                     <div>
                         <Button type="primary" shape="circle" icon="plus" style={{marginRight: '10px'}} onClick={this.openForm} />
                         <Button type="Normal" onClick={this.submitChange} >提交修改</Button>
