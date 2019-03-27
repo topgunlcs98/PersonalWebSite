@@ -58,6 +58,7 @@ app.post("/api/website/profileSettings/setSkill", changeSkill) //改技能
 app.post("/api/website/profileSettings/setInterest", changeInterest) //改技能
 app.post("/api/website/profileSettings/setEdu", changeEdu) //改教育经历
 app.post("/api/website/profileSettings/setWork", changeWork) //修改工作经历
+app.post("/api/website/profileSettings/setProject", changeProject) //修改项目经历
 //获取简历
 function fetchProfile(req,res) {
     ProfileModel
@@ -272,6 +273,25 @@ function changeWork(req,res) {
                 res.json(200)
             },
             function(){
+                res.sendStatus(400)
+            }
+        )
+}
+
+function changeProject(req, res) {
+    const {index,projects} = req.body
+    ProfileModel
+        .updateOne({_id: index},{project: projects},
+            function(err){
+                if(err) {
+                    console.log(err)
+                }
+            })
+        .then(
+            function(){
+                res.json(200)
+            },
+            function() {
                 res.sendStatus(400)
             }
         )
