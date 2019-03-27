@@ -53,7 +53,7 @@ export default class WorkSetting extends Component {
             works: oldState,
             startTime: '',
             endTime: '',
-            place: '1111',
+            place: '',
             title: '',
             isShow: false
         })
