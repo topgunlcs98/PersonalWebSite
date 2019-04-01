@@ -4,6 +4,7 @@ import SkillSetting from './components/SkillSetting'
 import InterestSetting from './components/InterestSetting'
 import EducationSetting from './components/EducationSetting'
 import WorkSetting from './components/WorkSetting'
+import ProjectSetting from './components/ProjectSetting'
 import { ProfileApi } from 'src/ajax'
 
 export default class ResumeCard extends Component {
@@ -51,6 +52,7 @@ export default class ResumeCard extends Component {
             <InterestSetting id={this.state.id} interests={this.state.interest} />
             <EducationSetting id={this.state.id} educations={this.state.education} />
             <WorkSetting id={this.state.id} works={this.state.work} />
+            <ProjectSetting id={this.state.id} projects={this.state.project} />
             </div>
         )
     }

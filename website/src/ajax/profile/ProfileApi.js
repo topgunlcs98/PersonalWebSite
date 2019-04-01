@@ -14,5 +14,8 @@ export default {
     },
     changeWork(body) {
         return ajax.post('/api/website/profileSettings/setWork', body)
+    },
+    changeProjects(body) {
+        return ajax.post('/api/website/profileSettings/setProject',body)
     }
 }
