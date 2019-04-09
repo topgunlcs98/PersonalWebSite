@@ -14,7 +14,7 @@
   2. 打算后续集成一下富文本编辑器
  
  
-  效果预览：
+  即将部署，效果预览：
   ![image](https://github.com/topgunlcs98/PersonalWebSite/blob/master/pic1.png)
   ![image](https://github.com/topgunlcs98/PersonalWebSite/blob/master/pic2.png)
   
