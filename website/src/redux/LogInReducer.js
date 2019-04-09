@@ -1,6 +1,6 @@
 import {LOGGED_IN} from './ActionTypes'
 const initialState = {
-    isSuccess: true
+    isSuccess: false
 }
 
 export default function LogInReducer(state=initialState, action) {
