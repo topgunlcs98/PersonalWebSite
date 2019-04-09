@@ -10,5 +10,7 @@
   2. 登陆，管理内容（修改简历，增删改博客）
   
 ### 4/2 status:
-  基本完成，等待部署。
-  打算后续集成一下富文本编辑器
+  1. 基本完成，等待部署。
+  2. 打算后续集成一下富文本编辑器
+  ！[image](https://github.com/topgunlcs98/PersonalWebSite/blob/master/pic1.png)
+  
